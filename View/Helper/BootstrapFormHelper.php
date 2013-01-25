@@ -5,6 +5,19 @@ App::uses('FormHelper', 'View/Helper');
  */
 class BootstrapFormHelper extends FormHelper {
 
+	
+	public function create($model = NULL, $options = array()) {
+		if (isset($options['class']) && $options['class']  == 'form-inline')
+		$options += array(
+			'inputDefaults' => array(
+				'between' => '&nbsp;',
+				'after' => '&nbsp;',
+				'div' => false,
+			)
+		);
+		return parent::create($model, $options);
+	}
+
 	/**
 	* Build custom input field for Twitter Bootstrap support
 	*
@@ -39,7 +52,6 @@ class BootstrapFormHelper extends FormHelper {
 			$defaults['div']['class'] .= ' required';
 		}
 		
-
 		$options = array_merge($defaults, $this->_inputDefaults, $options);
 
 		if (isset($options['type']) && $options['type'] == 'radio') {
@@ -185,8 +197,8 @@ class BootstrapFormHelper extends FormHelper {
 	 */
 	public function submit($label = null, $options = array()) {
 		$defaults = array(
-			'div'	=> 'actions',
-			'class' => 'btn primary'
+			'div'	=> 'form-actions',
+			'class' => 'btn btn-primary btn-large'
 		);
 		$options = array_merge($defaults, $options);
 
