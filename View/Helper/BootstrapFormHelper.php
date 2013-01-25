@@ -19,7 +19,7 @@ class BootstrapFormHelper extends FormHelper {
 			'between'	=> '<div class="controls">',
 			'after'		=> '</div>',
 			'format'	=> array('before', 'label', 'between', 'input', 'error', 'after'),
-			'class'		=> 'span9', // @todo make this dynamic
+			'class'		=> 'input-block-level',
 			'div'		=> array(
 				'class' => 'control-group'
 			),
@@ -35,13 +35,18 @@ class BootstrapFormHelper extends FormHelper {
 			'prepend' => array(),
 		);
 
+		if (isset($options['required']) && $options['required'] === true) {
+			$defaults['div']['class'] .= ' required';
+		}
+		
+
 		$options = array_merge($defaults, $this->_inputDefaults, $options);
 
 		if (isset($options['type']) && $options['type'] == 'radio') {
 			$options['between'] = $options['after'] = '';
 		}
 
-		if (isset($options['help'])) {
+		if (isset($options['help']) && !empty($options['help'])) {
 			$options['after'] =  '<p class="help-block">' . $options['help'] . '</p>' . $options['after'];
 			unset($options['help']);
 		}
@@ -162,7 +167,7 @@ class BootstrapFormHelper extends FormHelper {
 	 *
 	 * @return string
 	 */
-	public function error($field, $text = null, $options = array()) {
+	public function error2($field, $text = null, $options = array()) {
 		// The only way currently to catch Model Relation validation errors :(
 		if ($field[0] == ucfirst($field[0])) {
 			$field = sprintf('%s.%s', $this->_modelScope, $field);
