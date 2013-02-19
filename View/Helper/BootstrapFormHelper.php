@@ -5,7 +5,7 @@ App::uses('FormHelper', 'View/Helper');
  */
 class BootstrapFormHelper extends FormHelper {
 
-	
+
 	public function create($model = NULL, $options = array()) {
 		if (isset($options['class']) && $options['class']  == 'form-inline')
 		$options += array(
@@ -28,22 +28,22 @@ class BootstrapFormHelper extends FormHelper {
 	*/
 	public function input($fieldName, $options = array()) {
 		$defaults = array(
-			'before'	=> '',
-			'between'	=> '<div class="controls">',
-			'after'		=> '</div>',
-			'format'	=> array('before', 'label', 'between', 'input', 'error', 'after'),
-			'class'		=> 'input-block-level',
-			'div'		=> array(
+			'before' => '',
+			'between' => '<div class="controls">',
+			'after'	=> '</div>',
+			'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
+			'class'	=> 'input-block-level',
+			'div' => array(
 				'class' => 'control-group'
 			),
-			'error'		=> array(
+			'error'	=> array(
 				'attributes' => array(
 					'class' => 'help-block error',
-					'wrap'	=> 'span'
+					'wrap' => 'span'
 				)
 			),
-			'help'		=> '',
-			'required'	=> false,
+			'help' => '',
+			'required' => false,
 			'append' => array(),
 			'prepend' => array(),
 		);
@@ -51,7 +51,7 @@ class BootstrapFormHelper extends FormHelper {
 		if (isset($options['required']) && $options['required'] === true) {
 			$defaults['div']['class'] .= ' required';
 		}
-		
+
 		$options = array_merge($defaults, $this->_inputDefaults, $options);
 
 		if (isset($options['type']) && $options['type'] == 'radio') {
@@ -60,7 +60,6 @@ class BootstrapFormHelper extends FormHelper {
 
 		if (isset($options['help']) && !empty($options['help'])) {
 			$options['after'] =  '<p class="help-block">' . $options['help'] . '</p>' . $options['after'];
-			unset($options['help']);
 		}
 
 		if (isset($options['actions'])) {
@@ -86,11 +85,8 @@ class BootstrapFormHelper extends FormHelper {
 
 			$options['between'] .= '<div class="input-append input-prepend">' . $prepend;
 			$options['after'] = $append . '</div>' . $options['after'];
-			
-			unset($options['prepend']);
-			unset($options['append']);
 		}
-
+		unset($options['help'], $options['prepend'], $options['append']);
 		return parent::input($fieldName, $options);
 	}
 
@@ -171,24 +167,6 @@ class BootstrapFormHelper extends FormHelper {
 	}
 
 	/**
-	 * Render error messages
-	 *
-	 * @param string $field
-	 * @param mixed $text
-	 * @param array $options
-	 *
-	 * @return string
-	 */
-	public function error2($field, $text = null, $options = array()) {
-		// The only way currently to catch Model Relation validation errors :(
-		if ($field[0] == ucfirst($field[0])) {
-			$field = sprintf('%s.%s', $this->_modelScope, $field);
-		}
-
-		return parent::error($field, $text, $options);
-	}
-
-	/**
 	 * Submit button
 	 *
 	 * @param string $label
@@ -198,7 +176,7 @@ class BootstrapFormHelper extends FormHelper {
 	public function submit($label = null, $options = array()) {
 		$defaults = array(
 			'div'	=> 'form-actions',
-			'class' => 'btn btn-primary btn-large'
+			'class' => 'btn btn-primary'
 		);
 		$options = array_merge($defaults, $options);
 

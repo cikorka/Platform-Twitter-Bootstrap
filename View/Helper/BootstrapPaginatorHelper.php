@@ -48,13 +48,13 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
 	public function numbers($options = array()) {
 		if ($options === true) {
 			$options = array(
-				'before' => ' | ', 'after' => ' | ', 'first' => 'first', 'last' => 'last'
+				'first' => __('First page'), 'last' => __('Last page')
 			);
 		}
 
 		$defaults = array(
 			'tag' => 'li', 'before' => null, 'after' => null, 'model' => $this->defaultModel(), 'class' => null,
-			'modulus' => '8', 'separator' => ' | ', 'first' => null, 'last' => null, 'ellipsis' => '...',
+			'modulus' => '8', 'separator' => null, 'first' => null, 'last' => null, 'ellipsis' => '...',
 		);
 		$options += $defaults;
 
