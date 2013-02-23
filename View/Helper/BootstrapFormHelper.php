@@ -54,7 +54,7 @@ class BootstrapFormHelper extends FormHelper {
 
 		$options = array_merge($defaults, $this->_inputDefaults, $options);
 
-		if (isset($options['type']) && $options['type'] == 'radio') {
+		if (isset($options['type']) && $options['type'] == 'radio' || $options['div'] === false) {
 			$options['between'] = $options['after'] = '';
 		}
 
