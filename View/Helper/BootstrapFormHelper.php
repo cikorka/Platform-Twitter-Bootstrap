@@ -1,13 +1,15 @@
 <?php
+
 App::uses('FormHelper', 'View/Helper');
+
 /**
  * Twitter Bootstrap Form Helper
  */
+
 class BootstrapFormHelper extends FormHelper {
 
-
-	public function create($model = NULL, $options = array()) {
-		if (isset($options['class']) && $options['class']  == 'form-inline')
+	public function create($model = null, $options = array()) {
+		if (isset($options['class']) && $options['class'] == 'form-inline')
 		$options += array(
 			'inputDefaults' => array(
 				'between' => '&nbsp;',
@@ -18,14 +20,14 @@ class BootstrapFormHelper extends FormHelper {
 		return parent::create($model, $options);
 	}
 
-	/**
-	* Build custom input field for Twitter Bootstrap support
-	*
-	* @param string $fieldName
-	* @param array $options
-	*
-	* @return string
-	*/
+/**
+ * Build custom input field for Twitter Bootstrap support
+ *
+ * @param string $fieldName
+ * @param array $options
+ *
+ * @return string
+ */
 	public function input($fieldName, $options = array()) {
 		$defaults = array(
 			'before' => '',
@@ -59,7 +61,7 @@ class BootstrapFormHelper extends FormHelper {
 		}
 
 		if (isset($options['help']) && !empty($options['help'])) {
-			$options['after'] =  '<p class="help-block">' . $options['help'] . '</p>' . $options['after'];
+			$options['after'] = '<p class="help-block">' . $options['help'] . '</p>' . $options['after'];
 		}
 
 		if (isset($options['actions'])) {
@@ -67,19 +69,17 @@ class BootstrapFormHelper extends FormHelper {
 			unset($options['actions']);
 		}
 
-		if(!empty($options['prepend']) && empty($options['append'])) {
+		if (!empty($options['prepend']) && empty($options['append'])) {
 			$prepend = is_array($options['prepend']) ? join("\n", $options['prepend']) : '<span class="add-on">' . $options['prepend'] . '</span>';
 			$options['between'] .= '<div class="input-prepend">' . $prepend;
 			$options['after'] = '</div>' . $options['after'];
 			unset($options['prepend']);
-		}
-		elseif(!empty($options['append']) && empty($options['prepend'])) {
+		} elseif (!empty($options['append']) && empty($options['prepend'])) {
 			$append = is_array($options['append']) ? join("\n", $options['append']) : '<span class="add-on">' . $options['append'] . '</span>';
 			$options['between'] .= '<div class="input-append">';
 			$options['after'] = $append . '</div>' . $options['after'];
 			unset($options['append']);
-		}
-		elseif(!empty($options['prepend']) && !empty($options['append'])) {
+		} elseif (!empty($options['prepend']) && !empty($options['append'])) {
 			$prepend = is_array($options['prepend']) ? join("\n", $options['prepend']) : '<span class="add-on">' . $options['prepend'] . '</span>';
 			$append = is_array($options['append']) ? join("\n", $options['append']) : '<span class="add-on">' . $options['append'] . '</span>';
 
@@ -96,7 +96,6 @@ class BootstrapFormHelper extends FormHelper {
 		return parent::label($fieldName, $text, $options);
 	}
 
-
 	protected function _inputLabel($fieldName, $label, $options) {
 		if (isset($options['help'])) {
 			$this->_labelHelpText = $options['help'];
@@ -107,28 +106,27 @@ class BootstrapFormHelper extends FormHelper {
 		return $label;
 	}
 
-
-	/**
-	 * Creates an HTML link, but access the url using method DELETE.
-	 * Requires javascript to be enabled in browser.
-	 *
-	 * This method creates a `<form>` element. So do not use this method inside an existing form.
-	 * Instead you should add a submit button using FormHelper::submit()
-	 *
-	 * ### Options:
-	 *
-	 * - `data` - Array with key/value to pass in input hidden
-	 * - `confirm` - Can be used instead of $confirmMessage.
-	 * - Other options is the same of HtmlHelper::link() method.
-	 * - The option `onclick` will be replaced.
-	 *
-	 * @param string $title The content to be wrapped by <a> tags.
-	 * @param mixed $url Cake-relative URL or array of URL parameters, or external URL (starts with http://)
-	 * @param array $options Array of HTML attributes.
-	 * @param string $confirmMessage JavaScript confirmation message.
-	 * @return string An `<a />` element.
-	 * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::postLink
-	 */
+/**
+ * Creates an HTML link, but access the url using method DELETE.
+ * Requires javascript to be enabled in browser.
+ *
+ * This method creates a `<form>` element. So do not use this method inside an existing form.
+ * Instead you should add a submit button using FormHelper::submit()
+ *
+ * ### Options:
+ *
+ * - `data` - Array with key/value to pass in input hidden
+ * - `confirm` - Can be used instead of $confirmMessage.
+ * - Other options is the same of HtmlHelper::link() method.
+ * - The option `onclick` will be replaced.
+ *
+ * @param string $title The content to be wrapped by <a> tags.
+ * @param mixed $url Cake-relative URL or array of URL parameters, or external URL (starts with http://)
+ * @param array $options Array of HTML attributes.
+ * @param string $confirmMessage JavaScript confirmation message.
+ * @return string An `<a />` element.
+ * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::postLink
+ */
 	public function deleteLink($title, $url = null, $options = array(), $confirmMessage = false) {
 		if (!empty($options['confirm'])) {
 			$confirmMessage = $options['confirm'];
@@ -166,13 +164,13 @@ class BootstrapFormHelper extends FormHelper {
 		return $out;
 	}
 
-	/**
-	 * Submit button
-	 *
-	 * @param string $label
-	 *
-	 * @return string
-	 */
+/**
+ * Submit button
+ *
+ * @param string $label
+ *
+ * @return string
+ */
 	public function submit($label = null, $options = array()) {
 		$defaults = array(
 			'div'	=> 'form-actions',

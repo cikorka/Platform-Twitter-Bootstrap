@@ -1,19 +1,22 @@
 <?php
+
 App::uses('PaginatorHelper', 'View/Helper');
+
 /**
  * Twitter Bootstrap Paginator Helper
  */
+
 class BootstrapPaginatorHelper extends PaginatorHelper {
 
-	/**
-	 * Make table headers sortable
-	 *
-	 * @param string $key
-	 * @param mixed $title
-	 * @param array $options
-	 *
-	 * @return string
-	 */
+/**
+ * Make table headers sortable
+ *
+ * @param string $key
+ * @param mixed $title
+ * @param array $options
+ *
+ * @return string
+ */
 	public function sortTableHeader($key, $title = null, $options = array()) {
 		$content = parent::sort($key, $title, $options + array('block' => 'script'));
 
@@ -37,14 +40,14 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
 		return sprintf('<th class="blue header %s">%s</th>', $class, $content);
 	}
 
-	/**
-	 * Numbers paginator as we know it
-	 * @see parent "numbers" function for docblock
-	 * @changes $currentClass & and now active, is wrapped as a link aswell to support TwitterBootstrap
-	 *
-	 * @param mixed $options Options for the numbers, (before, after, model, modulus, separator)
-	 * @return string numbers string.
-	 */
+/**
+ * Numbers paginator as we know it
+ * @see parent "numbers" function for docblock
+ * @changes $currentClass & and now active, is wrapped as a link aswell to support TwitterBootstrap
+ *
+ * @param mixed $options Options for the numbers, (before, after, model, modulus, separator)
+ * @return string numbers string.
+ */
 	public function numbers($options = array()) {
 		if ($options === true) {
 			$options = array(
@@ -57,7 +60,7 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
 		);
 		$options += $defaults;
 
-		$params = (array)$this->params($options['model']) + array('page'=> 1);
+		$params = (array)$this->params($options['model']) + array('page' => 1);
 		unset($options['model']);
 
 		if ($params['pageCount'] <= 1) {
@@ -97,8 +100,7 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
 			$out .= $before;
 
 			for ($i = $start; $i < $params['page']; $i++) {
-				$out .= $this->Html->tag($tag, $this->link($i, array('page' => $i), $options), compact('class'))
-					. $separator;
+				$out .= $this->Html->tag($tag, $this->link($i, array('page' => $i), $options), compact('class')) . $separator;
 			}
 
 			$currentClass = 'active';
@@ -112,8 +114,7 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
 
 			$start = $params['page'] + 1;
 			for ($i = $start; $i < $end; $i++) {
-				$out .= $this->Html->tag($tag, $this->link($i, array('page' => $i), $options), compact('class'))
-					. $separator;
+				$out .= $this->Html->tag($tag, $this->link($i, array('page' => $i), $options), compact('class')) . $separator;
 			}
 
 			if ($end != $params['page']) {
@@ -190,7 +191,5 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
 			), $options);
 		return parent::last($last, $options);
 	}
-
-
 
 }
